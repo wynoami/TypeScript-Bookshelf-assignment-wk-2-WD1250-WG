@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Bookshelf</title>
+        <link rel="stylesheet" href="style.css" />
+        <script src="classes.js" defer></script>
+        <script src="script.js" defer></script>
+    </head>
+    <body>
+        <main>
+            <h1>Bookshelf</h1>
+            <form>
+                <label for="">Title</label>
+                <input type="text" name="title" id="title-input" />
+                <label for="">Author</label>
+                <input type="text" name="author" id="author-input" />
+                <label for="">Pages</label>
+                <input type="number" name="pages" id="pages-input" min="1" />
+                <section>
+                    <input
+                        type="radio"
+                        name="type"
+                        id="fiction-radio"
+                        value="fiction"
+                        checked
+                    />
+                    <label for="fiction-radio">Fiction</label>
+                    <input
+                        type="radio"
+                        name="type"
+                        id="non-fiction-radio"
+                        value="non-fiction"
+                    />
+                    <label for="non-fiction-radio">Non-Fiction</label>
+                </section>
+                <label for="" id="theme-label">Theme</label>
+                <input type="text" name="theme" id="theme-input" />
+                <label for="" id="subject-label">Subject</label>
+                <input type="text" name="subject" id="subject-input" />
+                <input type="button" value="Submit" />
+            </form>
+            <ul>
+                No items in the bookshelf
+            </ul>
+        </main>
+    </body>
+</html>
