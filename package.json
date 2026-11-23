@@ -1,0 +1,25 @@
+{
+  "name": "typescript-bookshelf-assignment-wk-2-wd1250-wg",
+  "version": "1.0.0",
+  "description": "You previously built a JavaScript-based bookshelf application that allowed users to add and display books. Now that you've learned TypeScript, you'll enhance that application by converting it to TypeScript and adding new features. This assignment will reinforce your understanding of TypeScript types, classes, and DOM manipulation while building something practical.",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wynoami/TypeScript-Bookshelf-assignment-wk-2-WD1250-WG.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wynoami/TypeScript-Bookshelf-assignment-wk-2-WD1250-WG/issues"
+  },
+  "homepage": "https://github.com/wynoami/TypeScript-Bookshelf-assignment-wk-2-WD1250-WG#readme",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "typescript": "^7.0.2"
+  }
+}

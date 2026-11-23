@@ -1,0 +1,293 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+/* ─── Reset & variables ─────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --background: #70b2c1;
+    --surface: rgba(255, 255, 255, 0.9);
+    --ink: #13252a;
+    --muted: #35535b;
+    --accent: #1f5f6e;
+    --accent-dark: #164550;
+    --fiction: #8a4fbf;
+    --non-fiction: #d9822b;
+    --danger: #a12a2a;
+    --danger-soft: #fde8e8;
+    --highlight: #ffe27a;
+    --radius: 0.25rem;
+    --speed: 200ms; /* keep in sync with REMOVE_ANIMATION_MS in main.ts */
+
+    padding: 1rem;
+    font-family: "Roboto", sans-serif;
+    background: var(--background);
+    color: var(--ink);
+}
+
+[hidden] {
+    display: none !important;
+}
+
+main {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+h1 {
+    font-size: 4rem;
+    text-align: center;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+/* ─── Form ──────────────────────────────────────────────── */
+
+label {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 1.5rem;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="search"] {
+    display: block;
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.25rem 0.5rem;
+    font: inherit;
+    font-size: 1.5rem;
+    border: 2px solid transparent;
+    border-radius: var(--radius);
+}
+
+input:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--accent-dark);
+    outline-offset: 2px;
+}
+
+input[aria-invalid="true"] {
+    border-color: var(--danger);
+    background: var(--danger-soft);
+}
+
+.type-picker {
+    margin-top: 1rem;
+    border: none;
+}
+
+.type-picker legend {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.type-picker label {
+    display: inline;
+    margin-top: 0;
+}
+
+input[type="radio"] {
+    margin-right: 0.5rem;
+    accent-color: var(--accent);
+}
+
+input[type="radio"] + label + input[type="radio"] {
+    margin-left: 1rem;
+}
+
+/* Theme/subject fields slide open and closed instead of jumping */
+.conditional-field {
+    max-height: 8rem;
+    overflow: hidden;
+    opacity: 1;
+    transition:
+        max-height var(--speed) ease,
+        opacity var(--speed) ease;
+}
+
+.conditional-field.is-hidden {
+    max-height: 0;
+    opacity: 0;
+}
+
+.form-error {
+    margin-top: 1rem;
+    padding: 0.5rem 0.75rem;
+    border-left: 4px solid var(--danger);
+    border-radius: var(--radius);
+    background: var(--danger-soft);
+    color: var(--danger);
+    font-size: 1.25rem;
+}
+
+.form-error ul {
+    list-style: none;
+}
+
+.submit-button {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.4rem 1rem;
+    font: inherit;
+    font-size: 1.5rem;
+    color: white;
+    background: var(--accent);
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: background var(--speed) ease;
+}
+
+.submit-button:hover {
+    background: var(--accent-dark);
+}
+
+/* ─── Shelf ─────────────────────────────────────────────── */
+
+.shelf {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 0.15rem dashed black;
+}
+
+.shelf-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.book-counter {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.shelf-stats {
+    margin-top: 0.25rem;
+    font-size: 1.1rem;
+    color: var(--muted);
+}
+
+.empty-message {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    font-style: italic;
+}
+
+.book-list {
+    display: grid;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    list-style: none;
+}
+
+.book {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    background: var(--surface);
+    border-left: 6px solid var(--accent);
+    border-radius: var(--radius);
+    font-size: 1.5rem;
+    transition:
+        opacity var(--speed) ease,
+        transform var(--speed) ease;
+}
+
+.book--fiction {
+    border-left-color: var(--fiction);
+}
+
+.book--non-fiction {
+    border-left-color: var(--non-fiction);
+}
+
+/* Only the newly added book animates in */
+.book.is-new {
+    animation: book-in var(--speed) ease both;
+}
+
+/* Fades and slides out before it's removed */
+.book.is-removing {
+    opacity: 0;
+    transform: translateX(1rem);
+}
+
+@keyframes book-in {
+    from {
+        opacity: 0;
+        transform: translateY(-0.5rem);
+    }
+}
+
+.book-title {
+    font-weight: 700;
+}
+
+.book-meta {
+    margin-top: 0.15rem;
+    font-size: 1.1rem;
+    color: var(--muted);
+}
+
+mark {
+    background: var(--highlight);
+    color: inherit;
+    border-radius: 0.15rem;
+    padding: 0 0.05em;
+}
+
+.remove-button {
+    flex-shrink: 0;
+    padding: 0.25rem 0.75rem;
+    font: inherit;
+    font-size: 1rem;
+    color: var(--danger);
+    background: transparent;
+    border: 2px solid var(--danger);
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition:
+        background var(--speed) ease,
+        color var(--speed) ease;
+}
+
+.remove-button:hover {
+    color: white;
+    background: var(--danger);
+}
+
+/* ─── Small screens & reduced motion ────────────────────── */
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2.75rem;
+    }
+
+    .book {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}

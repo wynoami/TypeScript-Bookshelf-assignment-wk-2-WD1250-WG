@@ -5,45 +5,65 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Bookshelf</title>
         <link rel="stylesheet" href="style.css" />
-        <script src="classes.js" defer></script>
-        <script src="script.js" defer></script>
+        <!-- type="module" lets main.js import from bookshelf.js -->
+        <script type="module" src="dist/main.js"></script>
     </head>
     <body>
         <main>
             <h1>Bookshelf</h1>
-            <form>
-                <label for="">Title</label>
-                <input type="text" name="title" id="title-input" />
-                <label for="">Author</label>
-                <input type="text" name="author" id="author-input" />
-                <label for="">Pages</label>
-                <input type="number" name="pages" id="pages-input" min="1" />
-                <section>
-                    <input
-                        type="radio"
-                        name="type"
-                        id="fiction-radio"
-                        value="fiction"
-                        checked
-                    />
+
+            <!-- novalidate: our TypeScript handles validation and error messages -->
+            <form id="book-form" novalidate>
+                <label for="title-input">Title</label>
+                <input type="text" name="title" id="title-input" autocomplete="off" />
+
+                <label for="author-input">Author</label>
+                <input type="text" name="author" id="author-input" autocomplete="off" />
+
+                <label for="pages-input">Pages</label>
+                <input type="number" name="pages" id="pages-input" min="1" step="1" />
+
+                <fieldset class="type-picker">
+                    <legend>Type</legend>
+                    <input type="radio" name="type" id="fiction-radio" value="fiction" checked />
                     <label for="fiction-radio">Fiction</label>
-                    <input
-                        type="radio"
-                        name="type"
-                        id="non-fiction-radio"
-                        value="non-fiction"
-                    />
+                    <input type="radio" name="type" id="non-fiction-radio" value="non-fiction" />
                     <label for="non-fiction-radio">Non-Fiction</label>
-                </section>
-                <label for="" id="theme-label">Theme</label>
-                <input type="text" name="theme" id="theme-input" />
-                <label for="" id="subject-label">Subject</label>
-                <input type="text" name="subject" id="subject-input" />
-                <input type="button" value="Submit" />
+                </fieldset>
+
+                <div class="conditional-field" id="theme-field">
+                    <label for="theme-input">Theme</label>
+                    <input type="text" name="theme" id="theme-input" autocomplete="off" />
+                </div>
+
+                <div class="conditional-field is-hidden" id="subject-field">
+                    <label for="subject-input">Subject</label>
+                    <input type="text" name="subject" id="subject-input" autocomplete="off" />
+                </div>
+
+                <div id="form-error" class="form-error" role="alert" hidden></div>
+
+                <button type="submit" class="submit-button">Add Book</button>
             </form>
-            <ul>
-                No items in the bookshelf
-            </ul>
+
+            <section class="shelf" aria-labelledby="shelf-heading">
+                <div class="shelf-header">
+                    <h2 id="shelf-heading">Your Books</h2>
+                    <p id="book-counter" class="book-counter" aria-live="polite">0 books on the shelf</p>
+                </div>
+                <p id="shelf-stats" class="shelf-stats" hidden></p>
+
+                <label for="search-input">Search by title or author</label>
+                <input
+                    type="search"
+                    id="search-input"
+                    placeholder="Start typing…"
+                    autocomplete="off"
+                />
+
+                <p id="empty-message" class="empty-message">No items in the bookshelf</p>
+                <ul id="book-list" class="book-list"></ul>
+            </section>
         </main>
     </body>
 </html>
